@@ -35,8 +35,8 @@ import java.util.stream.Collectors;
 
 
 //for Angular Client (withCredentials)
-//@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true")
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")

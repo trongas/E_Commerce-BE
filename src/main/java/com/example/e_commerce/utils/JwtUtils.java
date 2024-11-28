@@ -13,6 +13,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
@@ -34,6 +35,7 @@ public class JwtUtils {
 
     public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
         String jwt = generateTokenFromUsername(userPrincipal.getUsername());
+        System.out.println("JWT: " + jwt);
         return generateCookie(jwtCookie, jwt, "/api");
     }
 
@@ -70,8 +72,10 @@ public class JwtUtils {
     }
 
     private Key key() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
+
+
 
     public boolean validateJwtToken(String authToken) {
         if (authToken == null || authToken.trim().isEmpty()) {
@@ -120,6 +124,7 @@ public class JwtUtils {
     }
 
     private ResponseCookie generateCookie(String name, String value, String path) {
+        System.out.println("Name: " + name + ", Value: " + value);
         ResponseCookie cookie = ResponseCookie.from(name, value).path(path).maxAge(24 * 60 * 60).httpOnly(true).build();
         return cookie;
     }

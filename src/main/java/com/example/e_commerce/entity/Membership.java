@@ -20,5 +20,7 @@ public class Membership {
 
     @Lob
     private String membershipDesc;
+
+
 }
 

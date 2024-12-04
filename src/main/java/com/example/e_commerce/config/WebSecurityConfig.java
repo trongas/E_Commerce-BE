@@ -98,6 +98,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                         auth.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/test/all").permitAll()
                                 .requestMatchers("/api/test/admin").hasRole("ADMIN")
+                                .requestMatchers("/api/memberships").permitAll()
 
                                 .anyRequest().authenticated()
                 );
@@ -121,4 +122,5 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 }

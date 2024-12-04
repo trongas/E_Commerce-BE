@@ -1,12 +1,9 @@
 package com.example.e_commerce.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,32 +29,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "address_line1")
-    private String addressLine1;
-
-    @Column(name = "address_line2")
-    private String addressLine2;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "state")
-    private String state;
-
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    @ManyToOne
+    @JoinColumn(name = "membershipId")
+    private Membership membership;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

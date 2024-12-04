@@ -3,7 +3,6 @@ package com.example.e_commerce.services.impl;
 import com.example.e_commerce.entity.User;
 import com.example.e_commerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

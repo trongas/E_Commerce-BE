@@ -16,6 +16,14 @@ public class MembershipMapper {
         dto.setMembershipDesc(membership.getMembershipDesc());
         return dto;
     }
+    public void updateEntityFromRequest(Membership membership, MembershipRequest request) {
+        if (request.getMembershipType() != null) {
+            membership.setMembershipType(request.getMembershipType());
+        }
+        if (request.getMembershipDesc() != null) {
+            membership.setMembershipDesc(request.getMembershipDesc());
+        }
+    }
 
     public Membership convertToEntity(MembershipRequest membershipRequest) {
         Membership membership = new Membership();

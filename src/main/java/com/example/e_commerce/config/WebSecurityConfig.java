@@ -7,6 +7,7 @@ import com.example.e_commerce.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -99,9 +100,12 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                 .requestMatchers("/api/test/all").permitAll()
                                 .requestMatchers("/api/test/admin").hasRole("ADMIN")
                                 .requestMatchers("/api/memberships").permitAll()
-
+                                .requestMatchers("/api/products/**`").permitAll()
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .anyRequest().authenticated()
-                );
+                )
+        ;
 
         http.authenticationProvider(authenticationProvider());
 

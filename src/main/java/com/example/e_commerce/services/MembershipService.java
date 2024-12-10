@@ -12,5 +12,7 @@ public interface MembershipService {
     Page<MembershipResponse> getAllMemberships(Pageable pageable);
     MembershipResponse getMembershipById(Integer id);
     Membership createMembership(MembershipRequest requestDTO);
+    MembershipResponse updateMembership(Integer membershipId, MembershipRequest membershipRequest);
+
     void deleteMembership(Integer id);
 }

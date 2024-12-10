@@ -49,6 +49,19 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
+    public MembershipResponse updateMembership(Integer membershipId, MembershipRequest membershipRequest) {
+        Membership existingMembership = membershipRepository.findById(membershipId)
+                .orElseThrow(() -> new ResourceNotFoundException("Membership not found with ID: " + membershipId));
+
+        membershipMapper.updateEntityFromRequest(existingMembership, membershipRequest);
+
+        Membership updatedMembership = membershipRepository.save(existingMembership);
+
+        return membershipMapper.convertToMemberResponse(updatedMembership);
+    }
+
+
+    @Override
     public void deleteMembership(Integer id) {
         if (!membershipRepository.existsById(id)) {
             throw new CustomException("Cannot delete, Membership not found with ID: " + id);

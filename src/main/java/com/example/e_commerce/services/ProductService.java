@@ -1,21 +1,24 @@
 package com.example.e_commerce.services;
 
-import com.example.e_commerce.entity.Product;
+import com.example.e_commerce.dto.request.ProductRequest;
+import com.example.e_commerce.dto.response.ProductResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
 
 public interface ProductService {
-    List<Product> getAllProducts();
+    Page<ProductResponse> getAllProducts(String name, Boolean status, int pageNumber, int pageSize, String sortField, Sort.Direction sortDirection);
 
-    Optional<Product> getProductById(Integer id);
+    ProductResponse getProductById(Integer id);
 
-    List<Product> searchProductsByName(String name);
+    Page<ProductResponse> searchProductsByName(String name, int pageNumber, int pageSize);
 
-    List<Product> filterProductsByPrice(Double minPrice, Double maxPrice);
+    Page<ProductResponse> filterProductsByPrice(BigDecimal minPrice, BigDecimal maxPrice, int pageNumber, int pageSize);
 
-    Product saveProduct(Product product);
+    ProductResponse saveProduct(ProductRequest productRequest) ;
 
-    void deleteProduct(Integer id);
+    ProductResponse updateProduct(Integer productId, ProductRequest productRequest);
+
+    ProductResponse deleteProduct(Integer id);
 }
-

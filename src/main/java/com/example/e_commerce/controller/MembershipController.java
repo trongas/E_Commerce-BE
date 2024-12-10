@@ -38,9 +38,17 @@ public class MembershipController {
         return ResponseEntity.ok(membership);
     }
 
+    @PutMapping("/{membershipId}")
+    public ResponseEntity<MembershipResponse> updateMembership(
+            @PathVariable Integer membershipId,
+            @RequestBody MembershipRequest membershipRequest) {
+        MembershipResponse updatedMembership = membershipService.updateMembership(membershipId, membershipRequest);
+        return ResponseEntity.ok(updatedMembership);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCombo(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteCombo(@PathVariable Integer id) {
         membershipService.deleteMembership(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Membership with ID " + id + " has been successfully deleted.");
     }
 }

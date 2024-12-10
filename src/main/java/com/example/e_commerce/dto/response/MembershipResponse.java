@@ -13,8 +13,4 @@ public class MembershipResponse {
     private String membershipType;
     private String membershipDesc;
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

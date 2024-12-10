@@ -17,5 +17,6 @@ public class Suppliers {
 
     private String contactName;
 
+    private String address;
     private String contactPhone;
 }

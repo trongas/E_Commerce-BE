@@ -10,12 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class Product {
     @JoinColumn(name = "supplierId")
     private Suppliers supplier;
 
-    @Column(nullable = false)
     private Integer quantity;
 
     @Column(length = 50)
@@ -44,7 +43,8 @@ public class Product {
     @Column(precision = 8, scale = 3)
     private BigDecimal unitWeight;
 
-    private String picture;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductPicture> productPictures = new ArrayList<>();
 
     @Column(length = 45)
     private String currentOrder;
@@ -61,18 +61,15 @@ public class Product {
     private Integer unitsOnOrder;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 3, columnDefinition = "ENUM('Yes', 'No') DEFAULT 'Yes'")
     private Availability productAvailable;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 3, columnDefinition = "ENUM('Yes', 'No') DEFAULT 'No'")
     private DiscountAvailability discountAvailable;
 
     @Column(nullable = false)
     @Min(1)
     @Max(5)
     private Integer rating;
-
 
 }
 
